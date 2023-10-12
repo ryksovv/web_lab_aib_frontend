@@ -39,7 +39,8 @@ h2
 
 .main-catalog img, .promo-catalog img
 {
-    width: 100%;
+    align-content: center;
+    height: 300px;
     /* max-width: 300px; */
     object-fit: contain;
 }
@@ -53,9 +54,13 @@ h2
     margin: auto;
 }
 
-@media screen and (max-width: 900px) {
+@media (max-width: 900px) {
     .main-catalog,
     .promo-catalog {
         grid-template-columns: repeat(1, 1fr);
     }
+}
+
+body{
+    background-color: antiquewhite;
 }
