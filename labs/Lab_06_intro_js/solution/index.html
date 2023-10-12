@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>JS</title>
+</head>
+<body>
+<script>
+    let apple = 10;
+    alert(apple);
+    let condition = "random string";
+    console.log('Good game is ' + condition);
+/*
+    1.Использовал оператор let.
+    2.Вообще в JS есть три оператора объявления: var, let и const.
+    - var - наиболее старый оператор (при объявлении переменная - глобальная или в области видимости функции).
+        Переменную можно использовать до её объявления.
+    - let - более новый оператор с блочной видимостью (то есть видим только внутри функции/цикла, в котором он создан).
+        В отличие от var, его переменную нельзя использовать до объявления.
+    -const - также более новый оператор с блочной областью видения. Его магия заключается в том, что после создания и придания
+        значения переменной, её нельзя будет изменить.
+    3. При вызове alert, после прогрузки страницы в браузере выскакивает небольшое окошко, которое отображает информацию, которую
+    в него вписали.
+    4.console.log() может быть использована для поиска багов, либа проверки кода на работоспособность.
+*/
+
+    let rnd = 256;
+    let str = '100';
+    let bl = true;
+    console.log(rnd + rnd)
+    console.log(rnd + str)
+    console.log(rnd + bl)
+    console.log(str + str)
+    console.log(str + bl)
+    console.log(bl + bl)
+
+    let list = [];
+    for (let i = 0; i < 10; i++)
+    {
+        list[i] = -5 + i;
+    }
+    console.log('Исходный лист: ' + list)
+    list = list.filter(function(element){
+        return element >= 0;
+    });
+    console.log('Лист больше 0: ' + list);
+
+    function randomNumber() {
+        var randNum = Math.floor(Math.random() * (25)) + 1;
+        return randNum;
+    }
+    console.log(randomNumber());
+
+    function second(arr, num)
+    {
+        return arr.map(function(element)
+        {
+            return element*num;
+        })
+    }
+    let newList = [ 1, 3, 5, 4 ];
+    let finalArr = second(newList, 2);
+    console.log(finalArr);
+
+    let anon = function()
+    {
+        let wrd  = [ 'Хайп', 'Картошка', 'Капибара', 'HTML', 'Купить', ' Выяснить' ];
+        var randomIndex = Math.floor(Math.random() * wrd.length);
+        return wrd[randomIndex];
+    }
+    console.log(anon());
+
+    /*Объекты*/
+    const person = {
+        firstName: 'Олег',
+        surname: 'Шило',
+        patronymic: 'Николаевич',
+        birthday: 2004,
+        hobby: 'Авто',
+        group : 'Студент',
+        out()
+        {
+            alert('Это ' + this.surname + ' ' + this.firstName + ' ' + this.patronymic + ' ' + this.birthday + ' года рождения. Хобби: ' + this.hobby + '. В общем, его возраст: ' + (2023 - this.birthday));
+        }
+    };
+    person.out();
+
+    const zp = {
+        "Лебедев": 50000,
+        "Ванечкин": 3000,
+        "Старополов": 30000,
+        "Козлов": 24000,
+        "Смирнов": 36000,
+        "Староминской": 45000,
+        "Приморский": 55555,
+        "Иванов": 17000,
+        "Петров": 23000,
+        "Пасечник": 42300
+    }
+
+    let total = 0;
+    for (const surname in zp)
+    {
+        if (zp.hasOwnProperty(surname)) {
+            total += zp[surname];
+        }
+    }
+    console.log("Общая ЗП: " + total);
+</script>
+</body>
+</html>
