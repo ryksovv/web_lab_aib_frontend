@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>JS</title>
+    </head>
+    <body>
+        <script>
+            //Зад 1
+            var a = prompt('var one');
+            var _ = prompt('var two');
+            if (a === _)
+                console.log('equally')
+            else
+                console.log('unequally');
+            //Зад 2
+            var fruits = {
+                'apple': 'green',
+                'strawberry': 'red',
+                'blueberry': 'blue',
+                'raspberry': 'light red',
+                'lemon': 'yellow'
+            };
+            for (var fruit in fruits) {
+                console.log(fruit);
+            }
+            for (var fruit in fruits) {
+                console.log(fruit + " " + fruits[fruit]);
+            }
+            //Зад 3
+            function getInput(promptText) {
+                let value = 0;
+                while(value === 0)
+                {
+                    let input = prompt(promptText, undefined);
+                    value = parseFloat(input);
+                    if(isNaN(value))
+                    {
+                        value = 0;
+                    }
+                }
+                return value;
+            }
+            let numPeople = getInput('Введите кол-во человек ');
+            let salaryPerPerson = getInput('Введите зарплату на человека ');
+            alert('Затраты на ЗП ' + numPeople * salaryPerPerson);
+            //Зад 4
+            var students = [
+            { name: 'Петров А.А.', grade: 5 },
+            { name: 'Иванов Б.Б.', grade: 3.4 },
+            { name: 'Сидоров Г.Г.', grade: 9 },
+            { name: 'Немолодой Д.Д', grade: 2 },
+            { name: 'Молодой Е.Е', grade: 3.4 },
+            ];
+
+            var total = 0;
+            var count = 0;
+            var poorPerformingStudents = [];
+
+            for (var i = 0; i < students.length; i++)
+            {
+            var currentGrade = students[i].grade;
+
+            if (currentGrade < 0 || currentGrade > 5)
+            {
+                console.log('Это значение учитываться не будет, оно не соответствует допустимым значениям');
+                continue;
+            }
+
+            if (currentGrade < 4)
+            {
+                poorPerformingStudents.push(students[i]);
+            }
+
+            total += currentGrade;
+            count++;
+            }
+
+            var averageGrade = total / count;
+            console.log('Средняя оценка: ' + averageGrade);
+
+            console.log('Плохие студенты:');
+            if (poorPerformingStudents.length === 0)
+            {
+            console.log('Таких нет');
+            }
+
+            poorPerformingStudents.forEach((student) => {
+            console.log('Фио: ' + student.name + '; Оценка: ' + student.grade)
+            });
+
+        </script>
+    </body>
+</html>
