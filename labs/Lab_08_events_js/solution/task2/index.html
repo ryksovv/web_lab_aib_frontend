@@ -1,0 +1,24 @@
+</html>
+<html lang="ru">
+    <head>
+        <script src="app1.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="bttns">
+            <label for="redInput">Red:</label>
+            <input type="number" id="redInput" min="0" max="255" oninput="changeColor()">
+            <span id="redError" class="error"></span>
+
+            <label for="greenInput">Green:</label>
+            <input type="number" id="greenInput" min="0" max="255" oninput="changeColor()">
+            <span id="greenError" class="error"></span>
+
+            <label for="blueInput">Blue:</label>
+            <input type="number" id="blueInput" min="0" max="255" oninput="changeColor()">
+            <span id="blueError" class="error"></span>
+        </div>
+
+        <div id="colorSquare"></div>
+    </body>
+</html>

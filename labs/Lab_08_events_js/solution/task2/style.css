@@ -1,0 +1,15 @@
+.error {
+    color: red;
+}
+
+input,
+span {
+    padding-left: 5%;
+    display: block;
+}
+
+#colorSquare{
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+}
