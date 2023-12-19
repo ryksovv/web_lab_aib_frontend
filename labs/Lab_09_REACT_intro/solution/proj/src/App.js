@@ -1,24 +1,94 @@
+import React, { useState } from 'react';
 import './App.css';
-import { useState } from 'react';
 
+// Счётчик первый зад
+const Counter = ({ count, handleDec, handleInc }) => (
+  <div className='counter'>
+    <div className='count'>
+      <div>{count}</div>
+      <button onClick={handleDec}>-</button>
+      <button onClick={handleInc}>+</button>
+    </div>
+  </div>
+);
+
+// Состав поста
+const Post = ({ post, handleLike, handleDeletePost }) => (
+  <div key={post.id}>
+    <p>{post.username}</p>
+    <p>{post.text}</p>
+    <p>Тэги: {post.tags.join(', ')}</p>
+    <button onClick={() => handleLike(post.id)}>
+      {post.liked ? 'Unlike' : 'Like'} ({post.likes})
+    </button>
+    <button onClick={() => handleDeletePost(post.id)}>Delete</button>
+  </div>
+);
+
+// Создание поста
+const CreatePost = ({ newPost, setNewPost, handleAddPost }) => (
+  <div className='createPost'>
+    <h2>Добавить запись</h2>
+    <label>Username:</label><br></br>
+    <input
+      type='text'
+      name='user'
+      placeholder='Username'
+      value={newPost.username}
+      onChange={(e) => setNewPost({ ...newPost, username: e.target.value })}
+    /><br></br>
+    <label>Post Description:</label><br></br>
+    <input
+      type='text'
+      name='post'
+      placeholder='Post Description'
+      value={newPost.text}
+      onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
+    /><br></br>
+    <label>Tags (comma-separated):</label><br></br>
+    <input
+      type='text'
+      name='tags'
+      placeholder='Tags'
+      value={newPost.tags.join(',')}
+      onChange={(e) => setNewPost({ ...newPost, tags: e.target.value.split(',') })}
+    /><br></br>
+    <button onClick={handleAddPost}>Submit</button>
+  </div>
+);
+
+// Тэги
+const Tags = ({ showAllPosts, handleShowAllPosts, uniqueTags, selectedTags, handleTagClick }) => (
+  <div className='tags'>
+    <h2>Tags</h2>
+    <button onClick={handleShowAllPosts} className={showAllPosts ? 'selected' : ''}>
+      Все посты
+    </button>
+    {uniqueTags.map((tag) => (
+      <button
+        key={tag}
+        onClick={() => handleTagClick(tag)}
+        className={selectedTags.includes(tag) ? 'selected' : ''}
+      >
+        {tag}
+      </button>
+    ))}
+  </div>
+);
+
+// Main App Component
 function App() {
   const [count, setCount] = useState(0);
   const [posts, setPosts] = useState([
     { id: 1, username: 'user1', text: 'Post 1', likes: 0, tags: ['tag1', 'tag3'] },
     { id: 2, username: 'user2', text: 'Post 2', likes: 0, tags: ['tag2', 'tag3'] },
   ]);
-
   const [newPost, setNewPost] = useState({ username: '', text: '', tags: [] });
   const [selectedTags, setSelectedTags] = useState([]);
   const [showAllPosts, setShowAllPosts] = useState(true);
 
-  const handleDec = () => {
-    setCount(count - 1);
-  };
-
-  const handleInc = () => {
-    setCount(count + 1);
-  };
+  const handleDec = () => setCount(count - 1);
+  const handleInc = () => setCount(count + 1);
 
   const handleLike = (postId) => {
     setPosts((prevPosts) =>
@@ -33,7 +103,7 @@ function App() {
       )
     );
   };
-
+ // Функции действий над постом
   const handleAddPost = () => {
     const user = document.getElementsByName('user')[0].value;
     const postDescription = document.getElementsByName('post')[0].value;
@@ -78,70 +148,23 @@ function App() {
     : posts.filter((post) => post.tags.some((tag) => selectedTags.includes(tag)));
 
   return (
-    <div className='counter'>
-      <div className='count'>
-        <div>{count}</div>
-        <button onClick={handleDec}>-</button>
-        <button onClick={handleInc}>+</button>
-      </div>
+    <>
+      <Counter count={count} handleDec={handleDec} handleInc={handleInc} />
       <div className='post'>
         <h2>Посты</h2>
         {filteredPosts.map((post) => (
-          <div key={post.id}>
-            <p>{post.username}</p>
-            <p>{post.text}</p>
-            <p>Тэги: {post.tags.join(', ')}</p>
-            <button onClick={() => handleLike(post.id)}>
-              {post.liked ? 'Unlike' : 'Like'} ({post.likes})
-            </button>
-            <button onClick={() => handleDeletePost(post.id)}>Delete</button>
-          </div>
+          <Post key={post.id} post={post} handleLike={handleLike} handleDeletePost={handleDeletePost} />
         ))}
       </div>
-      <div className='createPost'>
-        <h2>Добавить запись</h2>
-        <label>Username:</label><br></br>
-        <input
-          type='text'
-          name='user'
-          placeholder='Username'
-          value={newPost.username}
-          onChange={(e) => setNewPost({ ...newPost, username: e.target.value })}
-        /><br></br>
-        <label>Post Description:</label><br></br>
-        <input
-          type='text'
-          name='post'
-          placeholder='Post Description'
-          value={newPost.text}
-          onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
-        /><br></br>
-        <label>Tags (comma-separated):</label><br></br>
-        <input
-          type='text'
-          name='tags'
-          placeholder='Tags'
-          value={newPost.tags.join(',')}
-          onChange={(e) => setNewPost({ ...newPost, tags: e.target.value.split(',') })}
-        /><br></br>
-        <button onClick={handleAddPost}>Submit</button>
-      </div>
-      <div className='tags'>
-        <h2>Tags</h2>
-        <button onClick={handleShowAllPosts} className={showAllPosts ? 'selected' : ''}>
-          Все посты
-        </button>
-        {uniqueTags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => handleTagClick(tag)}
-            className={selectedTags.includes(tag) ? 'selected' : ''}
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
-    </div>
+      <CreatePost newPost={newPost} setNewPost={setNewPost} handleAddPost={handleAddPost} />
+      <Tags
+        showAllPosts={showAllPosts}
+        handleShowAllPosts={handleShowAllPosts}
+        uniqueTags={uniqueTags}
+        selectedTags={selectedTags}
+        handleTagClick={handleTagClick}
+      />
+    </>
   );
 }
 
