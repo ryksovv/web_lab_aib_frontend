@@ -76,7 +76,7 @@ const Tags = ({ showAllPosts, handleShowAllPosts, uniqueTags, selectedTags, hand
   </div>
 );
 
-// Main App Component
+// Тело выполнения
 function App() {
   const [count, setCount] = useState(0);
   const [posts, setPosts] = useState([
