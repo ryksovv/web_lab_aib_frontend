@@ -9,15 +9,14 @@ def histo(text):
     for i in range(max_count, 0, -1):
         for char in symb:
             if amount[char] >= i:
-                print('#', end=' ')
+                print('#', end='')
             else:
-                print(' ', end=' ')
+                print(' ', end='')
         print()
+
     for char in symb:
-        print(char,end=' ')
+        print(char,end='')
     print()
 
 stream = input()
 histo(stream)
-##Вовочка приходит домой с двойкой по физкультуре. Отец спрашивает — за что. Вовочка отвечает:
-##— Да вот, физрук попросил обложить козла матами...

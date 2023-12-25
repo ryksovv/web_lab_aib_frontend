@@ -6,7 +6,7 @@ class TopPayersBlock(BaseXlsBlock):
     NAME = "Отчёт по активным клиентам"
 
     def write_header(self):
-        self.worksheet.write(self.row, self.col, f"**{self.NAME}**")
+        self.worksheet.write(self.row, self.col, f"{self.NAME}")
 
     def write_data(self):
         self.row += 1
@@ -33,13 +33,13 @@ class TopPayersBlock(BaseXlsBlock):
         for i, payer in enumerate(top_payers, start=1):
             client_info = next(client for client in clients if client['id'] == payer['client_id'])
             fio = client_info['fio']
-            self.worksheet.write(self.row + i, self.col, f"{i}. **{fio}**: {payer['total_amount']}")
+            self.worksheet.write(self.row + i, self.col, f"{i}. {fio}: {payer['total_amount']}")
 
 class TopCitiesBlock(BaseXlsBlock):
     NAME = "География клиентов"
 
     def write_header(self):
-        self.worksheet.write(self.row, self.col, f"**{self.NAME}**")
+        self.worksheet.write(self.row, self.col, f"{self.NAME}")
 
     def write_data(self):
         self.row += 1
@@ -54,13 +54,13 @@ class TopCitiesBlock(BaseXlsBlock):
         top_cities = sorted(city_counts.items(), key=lambda x: x[1], reverse=True)[:10]
 
         for i, (city, count) in enumerate(top_cities, start=1):
-            self.worksheet.write(self.row + i, self.col, f"{i}. **{city}**: {count} клиентов")
+            self.worksheet.write(self.row + i, self.col, f"{i}. {city}: {count} клиентов")
 
 class AccountStatusBlock(BaseXlsBlock):
     NAME = "Анализ состояния счёта"
 
     def write_header(self):
-        self.worksheet.write(self.row, self.col, f"**{self.NAME}**")
+        self.worksheet.write(self.row, self.col, f"{self.NAME}")
 
     def write_data(self):
         self.row += 1
@@ -79,4 +79,4 @@ class AccountStatusBlock(BaseXlsBlock):
         for i, (client_id, balance) in enumerate(top_balances, start=1):
             client_info = next(client for client in clients if client['id'] == client_id)
             fio = client_info['fio']
-            self.worksheet.write(self.row + i, self.col, f"{i}. **{fio}**: Баланс - {balance}")
+            self.worksheet.write(self.row + i, self.col, f"{i}. {fio}: Баланс - {balance}")

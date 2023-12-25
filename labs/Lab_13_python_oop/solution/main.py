@@ -4,7 +4,7 @@ import os
 from writer import XlsAnalyticPaymentWriter
 
 def load_data(file_path):
-    base_path = "E:\git proj\web_lab_aib_frontend\labs\Lab_13_python_oop"
+    base_path = "./"
     full_path = os.path.join(base_path, file_path)
 
     with open(full_path, 'r', encoding='utf-8') as file:
